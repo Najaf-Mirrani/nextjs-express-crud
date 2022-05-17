@@ -97,7 +97,7 @@ Creates a donation based on the information given in the mutation
 
 #### Update Donation
 
-Updates a donation based on the information given in the mutation.If a field is left empty than it does not update that field
+Updates a donation based on the information given in the mutation
 
 ```http
   POST /api/updateDonation
