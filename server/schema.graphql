@@ -1,0 +1,33 @@
+type user {
+  id: String
+  email: String
+  firstName: String
+  lastName: String
+}
+
+type donation {
+  id: String
+  userId: String
+  amount: Int
+  tip: Int
+}
+
+type Query {
+  users: [user]
+  donations: [donation]
+}
+
+type Mutation {
+  createUser(firstName: String!, lastName: String!, email: String!): user
+  updateUser(
+    id: String!
+    email: String
+    firstName: String
+    lastName: String
+  ): user
+  deleteUser(id: String): String
+
+  createDonation(userId: String!, amount: Int!, tip: Int!): donation
+  updateDonation(id: String!, userId: String, amount: Int, tip: Int): donation
+  deleteDonation(id: String): String
+}

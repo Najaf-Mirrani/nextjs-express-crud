@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "userId": "1",
+    "amount": 5000,
+    "tip": 70
+  },
+  {
+    "id": "2",
+    "userId": "3",
+    "amount": 2000,
+    "tip": 50
+  },
+  {
+    "id": "SywA_rlvc",
+    "userId": "2000",
+    "amount": 200,
+    "email": 1
+  }
+]
