@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Head from "next/head";
+import { toast, ToastContainer } from "react-nextjs-toast";
 import { executeQueryAndMutation } from "./../../utils/utils";
 
 export { AddEdit };
@@ -18,24 +19,31 @@ function AddEdit(props) {
   }
 
   async function createUser() {
-    executeQueryAndMutation(
-      `mutation{createUser(firstName:"${userFirstName}", lastName:"${userLastName}", email:"${userEmail}"){id email lastName firstName}}`
-    );
-    console.log(response.data.user);
-    router.push("/");
+    if (userEmail && userFirstName && userLastName) {
+      executeQueryAndMutation(
+        `mutation{createUser(firstName:"${userFirstName}", lastName:"${userLastName}", email:"${userEmail}"){id email lastName firstName}}`
+      );
+      router.push("..");
+    } else {
+      toast.notify(`please fill all the fields`);
+    }
   }
 
   async function updateUser(id) {
-    const response = await executeQueryAndMutation(
-      `mutation{updateUser(id: "${id}",firstName:"${userFirstName}", lastName:"${userLastName}", email:"${userEmail}"){id email lastName firstName}}`
-    );
-    console.log(response.user);
+    if (userEmail && userFirstName && userLastName) {
+      const response = await executeQueryAndMutation(
+        `mutation{updateUser(id: "${id}",firstName:"${userFirstName}", lastName:"${userLastName}", email:"${userEmail}"){id email lastName firstName}}`
+      );
+      router.push("..");
+    } else {
+      toast.notify(`please fill all the fields`);
+    }
   }
 
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Nest-Graphql</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -49,12 +57,14 @@ function AddEdit(props) {
           crossOrigin="anonymous"
         ></script>
       </Head>
+      <ToastContainer />
       <form>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input
             type="email"
-            class="form-control"
+            required
+            className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -63,21 +73,23 @@ function AddEdit(props) {
             }}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">First Name</label>
           <input
-            class="form-control"
+            className="form-control"
             id="exampleInputPassword1"
+            required
             placeholder="First Name"
             onChange={(e) => {
               setUserFirstName(e.target.value);
             }}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Last Name</label>
           <input
-            class="form-control"
+            required
+            className="form-control"
             id="exampleInputPassword1"
             placeholder="Last Name"
             onChange={(e) => {
@@ -85,7 +97,7 @@ function AddEdit(props) {
             }}
           />
         </div>
-        <button onClick={(e) => onSubmit()} class="btn btn-primary">
+        <button onClick={(e) => onSubmit()} className="btn btn-primary">
           Submit
         </button>
       </form>

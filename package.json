@@ -20,7 +20,8 @@
     "notarealdb": "^0.2.2",
     "react": "17.0.2",
     "react-bootstrap": "^2.4.0",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-nextjs-toast": "^1.2.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

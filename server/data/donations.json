@@ -2,7 +2,7 @@
   {
     "id": "1",
     "userId": "1",
-    "amount": 5000,
+    "amount": 7000,
     "tip": 70
   },
   {
@@ -12,9 +12,15 @@
     "tip": 50
   },
   {
-    "id": "SywA_rlvc",
-    "userId": "2000",
-    "amount": 200,
-    "email": 1
+    "id": "SJPs3t-v9",
+    "userId": "1",
+    "amount": 8000,
+    "tip": 80
+  },
+  {
+    "id": "rJIkaYbDq",
+    "userId": "1",
+    "amount": 3000,
+    "tip": 30
   }
 ]

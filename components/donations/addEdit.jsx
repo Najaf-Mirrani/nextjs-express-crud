@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-nextjs-toast";
 import { executeQueryAndMutation } from "../../utils/utils";
 
 export { AddEdit };
@@ -9,32 +10,40 @@ function AddEdit(props) {
   const donation = props?.donation;
   const isAddMode = !donation;
   const router = useRouter();
-  const [userFirstName, setUserFirstName] = useState("");
-  const [userLastName, setUserLastName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [userAmount, setUserAmount] = useState(null);
+  const [userTip, setUserTip] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   function onSubmit() {
     return isAddMode ? createDonation() : updateDonation(donation.id);
   }
 
   async function createDonation() {
-    await executeQueryAndMutation(
-      `mutation{createDonation(userId:"${userFirstName}", amount:${userLastName}, tip:${userEmail}){id userId amount tip}}`
-    );
-    router.push("..");
+    if (userId && userAmount && userTip) {
+      await executeQueryAndMutation(
+        `mutation{createDonation(userId:"${userId}", amount:${userAmount}, tip:${userTip}){id userId amount tip}}`
+      );
+      router.push("..");
+    } else {
+      toast.notify(`please fill all the fields`);
+    }
   }
 
   async function updateDonation(id) {
-    const response = await executeQueryAndMutation(
-      `mutation{updateDonation(id:"${id}",userId:"${userFirstName}", amount:${userLastName}, tip:${userEmail}){id userId amount tip}}`
-    );
-    router.push("..");
+    if (userId && userAmount && userTip) {
+      const response = await executeQueryAndMutation(
+        `mutation{updateDonation(id:"${id}",userId:"${userId}", amount:${userAmount}, tip:${userTip}){id userId amount tip}}`
+      );
+      router.push("..");
+    } else {
+      toast.notify(`please fill all the fields`);
+    }
   }
 
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Nest-Graphql</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -48,42 +57,43 @@ function AddEdit(props) {
           crossOrigin="anonymous"
         ></script>
       </Head>
+      <ToastContainer />
       <form>
-        <div class="form-group">
+        <div className="form-group">
           <label>UserId</label>
           <input
             required
-            class="form-control"
+            className="form-control"
             onChange={(e) => {
-              setUserEmail(e.target.value);
+              setUserId(e.target.value);
             }}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Donation</label>
           <input
-            class="form-control"
+            className="form-control"
             id="tip"
             placeholder="number"
             required
             onChange={(e) => {
-              setUserFirstName(e.target.value);
+              setUserAmount(e.target.value);
             }}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Tip</label>
           <input
-            class="form-control"
+            className="form-control"
             id="tip"
             placeholder="number"
             required
             onChange={(e) => {
-              setUserLastName(e.target.value);
+              setUserTip(e.target.value);
             }}
           />
         </div>
-        <button onClick={(e) => onSubmit()} class="btn btn-primary">
+        <button onClick={(e) => onSubmit()} className="btn btn-primary">
           Submit
         </button>
       </form>

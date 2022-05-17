@@ -109,14 +109,14 @@ const Mutation = {
     const {
       userId: currentUserId,
       amount: currentAmount,
-      email: currentTip,
+      tip: currentTip,
     } = donationsData.get(id);
 
     donationsData.update({
       id,
       userId: newUserId || currentUserId,
       amount: newAmount || currentAmount,
-      email: newTip || currentTip,
+      tip: newTip || currentTip,
     });
     return donationsData.get(id);
   },

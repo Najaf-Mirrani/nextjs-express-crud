@@ -4,7 +4,6 @@ export default AddEdit;
 
 export async function getServerSideProps({ params: { id } }) {
   const user = { id };
-
   return {
     props: { user },
   };
