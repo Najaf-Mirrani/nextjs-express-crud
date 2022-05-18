@@ -100,7 +100,7 @@ Creates a donation based on the information given in the mutation
 Updates a donation based on the information given in the mutation
 
 ```http
-  POST /api/updateDonation
+  POST /updateDonation
 ```
 
 | Parameter  | Type     | Description                                   |
