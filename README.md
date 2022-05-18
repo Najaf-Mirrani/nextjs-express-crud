@@ -31,7 +31,7 @@ To start the frontend next application
 #### Get all users
 
 ```http
-  GET /users
+  POST /users
 ```
 
 #### Create user
@@ -78,7 +78,7 @@ Deletes a user based on the given user id
 ## Donation Apis
 
 ```http
-  GET /donations
+  POST /donations
 ```
 
 #### Create donation
